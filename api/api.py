@@ -168,6 +168,5 @@ api.add_resource(Logout, "/logout")
 
 
 if __name__=="__main__":
-    app.run()
     db.create_all()
     app.run(debug=True)

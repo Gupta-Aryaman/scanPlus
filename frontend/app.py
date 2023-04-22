@@ -8,7 +8,11 @@ import ast
 app = Flask(__name__)
 
 app.config['token'] = ""
+app.config['email'] = ""
 app.config['UPLOAD_FOLDER_SCAN'] = "/home/aryaman/Desktop/main-app/static/temp"
+upload_folder_prescriptions = "/home/aryaman/Desktop/raj-it/images/prescriptions"
+app.config["UPLOAD_FOLDER_prescriptions"] = upload_folder_prescriptions
+
 
 api_url = "http://127.0.0.1:5000"
 
@@ -37,6 +41,7 @@ def login():
         )
         if response.headers['authentication']=="success":
             app.config['token'] = response.headers['token']
+            app.config['email'] = data['email']
             print(app.config['token'])
             return redirect("/dashboard")
         else:
@@ -123,8 +128,47 @@ def dashboard():
 
         response = requests.request("GET", url, headers=headers, data=payload)
 
-        print(response.text)
-        return render_template("dashboard.html")
+        if response.status_code==200:
+            data = ast.literal_eval(response.text)
+            # print(response.text)
+            name = data['name']
+            return render_template("dashboard.html", name = name)
+        else:
+            return "Invalid Token"
+        
+@app.route("/dashboard/upload", methods = ["GET", "POST"])
+def dashboard_upload():
+    if request.method=="GET":
+        return render_template("scan_at_dashboard.html")
+    else:
+        image = request.files['prescription']
+
+        pic_filename = secure_filename(image.filename)
+        pic_name = str(uuid.uuid1()) + "_" + pic_filename
+
+        image.save(os.path.join(app.config['UPLOAD_FOLDER_prescriptions'], pic_name))
+
+        data = {}
+        data['pic_name'] = pic_name
+        data['email'] = app.config['email']
+
+        url = "http://127.0.0.1:5000/dashboard/upload_prescription"
+        headers = {
+        'Authorization': 'Bearer '+app.config['token']
+        }
+        # r = requests.request(
+        #     "POST",
+        #     url,
+        #     data=data,
+        #     headers=headers
+        # )
+        response = requests.post(
+            url,
+            data,
+            headers=headers
+        )
+        # response = requests.request("POST", url, headers=headers, data=data)
+        return "hi"
 
 if __name__=="__main__":
     app.run(debug=True, port=8000)

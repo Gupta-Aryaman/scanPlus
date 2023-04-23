@@ -31,7 +31,7 @@ def mail_body(message):
         width: 600px !important;
       }
     }
-    
+
     @media (max-width: 620px) {
       .u-row-container {
         max-width: 100% !important;
@@ -53,42 +53,42 @@ def mail_body(message):
         margin: 0 auto;
       }
     }
-    
+
     body {
       margin: 0;
       padding: 0;
     }
-    
+
     table,
     tr,
     td {
       vertical-align: top;
       border-collapse: collapse;
     }
-    
+
     p {
       margin: 0;
     }
-    
+
     .ie-container table,
     .mso-container table {
       table-layout: fixed;
     }
-    
+
     * {
       line-height: inherit;
     }
-    
+
     a[x-apple-data-detectors='true'] {
       color: inherit !important;
       text-decoration: none !important;
     }
-    
+
     table,
     td {
       color: #000000;
     }
-    
+
     #u_body a {
       color: #0000ee;
       text-decoration: underline;
@@ -173,8 +173,9 @@ def mail_body(message):
                                 <tr>
                                   <td style="padding-right: 0px;padding-left: 0px;" align="center">
 
-                                    <img align="center" border="0" src="https://assets.unlayer.com/projects/146617/1679287119103-logo(1).png" alt="" title="" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 100%;max-width: 600px;"
-                                      width="600" />
+                                    <a href='https://postimg.cc/bZB39K2Y' target='_blank'><img src='https://i.postimg.cc/bZB39K2Y/scanAPP.png' border='0' align="center" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 100%;max-width: 600px;"
+                                      width="600" alt='scan-APP-removebg-preview'/></a>
+
 
                                   </td>
                                 </tr>
@@ -292,7 +293,7 @@ def mail_body(message):
                             <td style="overflow-wrap:break-word;word-break:break-word;padding:33px 55px;font-family:'Cabin',sans-serif;" align="left">
 
                               <div style="line-height: 160%; text-align: center; word-wrap: break-word;">
-                                <p style="font-size: 14px; line-height: 160%;"><span style="font-size: 22px; line-height: 35.2px;">Hi, </span></p>
+                                <p style="font-size: 14px; line-height: 160%;"><span style="font-size: 22px; line-height: 35.2px;">A gentle nudge to take your medicine, </span></p>
                                 <p style="font-size: 14px; line-height: 160%;"><span style="font-size: 18px; line-height: 28.8px;">"""+ message+""" </span></p>
                               </div>
 
@@ -306,10 +307,7 @@ def mail_body(message):
                           <tr>
                             <td style="overflow-wrap:break-word;word-break:break-word;padding:33px 55px 60px;font-family:'Cabin',sans-serif;" align="left">
 
-                              <div style="line-height: 160%; text-align: center; word-wrap: break-word;">
-                                <p style="line-height: 160%; font-size: 14px;"><span style="font-size: 18px; line-height: 28.8px;">Thanks,</span></p>
-                                <p style="line-height: 160%; font-size: 14px;"><span style="font-size: 18px; line-height: 28.8px;">The Company Team</span></p>
-                              </div>
+
 
                             </td>
                           </tr>
@@ -348,7 +346,7 @@ def mail_body(message):
 
                               <div style="color: #003399; line-height: 160%; text-align: center; word-wrap: break-word;">
                                 <p style="font-size: 14px; line-height: 160%;"><span style="font-size: 20px; line-height: 32px;"><strong>Get in touch</strong></span><span style="font-size: 16px; line-height: 25.6px; color: #000000;"></span></p>
-                                <p style="font-size: 14px; line-height: 160%;"><span style="font-size: 16px; line-height: 25.6px; color: #000000;">Info@YourCompany.com</span></p>
+                                <p style="font-size: 14px; line-height: 160%;"><span style="font-size: 16px; line-height: 25.6px; color: #000000;"></span></p>
                               </div>
 
                             </td>

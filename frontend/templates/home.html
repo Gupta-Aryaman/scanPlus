@@ -54,44 +54,9 @@
     .alignlogin{
       margin-left:1250px;
       margin-top:-950px;
-    }
-
-body {
-  background-color: black;
-  height: 100vh;
-  margin: 0rem;
-  overflow: hidden; 
-}
-
-
-
-#blur {
-  height: 100%;
-  width: 120%;
-  position: absolute;
-  z-index: 2;
-  backdrop-filter: blur(200px);
-}
-
-		.blob {
-			position: absolute;
-			width: 300px;
-			height: 100px;
-      z-index: 100000000;
-      background-color: white;
-			background: linear-gradient(to right, rgb(86, 7, 136), rgb(85, 6, 138));
-			border-radius: 50%;
-			transition: transform 0.5s ease-out;
-			transform: translate(-25px, -25px);
-      opacity: 0.8;
-      animation: rotate 20s infinte;
-      filter: blur(80px);
-		}
-    
-  
-      </style>
+    }</style>
 </head>
-<body style="background-color: rgb(239, 229, 248); overflow-x: hidden; overflow: auto; scroll-behavior: smooth;">
+<body style="background-color: rgb(239, 229, 248); overflow: auto; overflow-x: hidden; scroll-behavior: smooth;">
   <div class="container">
 		<div class="blob"></div>
     <div id="blur"></div></div>
@@ -218,7 +183,7 @@ body {
     <br>
 
     
-      <video width="1140" height="640" controls id="video">
+      <video width="1100" height="640" controls id="video">
         <source src="../static/how_it_works.mp4" type="video/mp4">
         Your browser does not support the video tag.
       </video>
@@ -229,6 +194,16 @@ body {
     <!--row 4 ends-->
         
     </div>
+    <footer style="background-color: #333; color: #fff; padding: 20px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto;">
+        <p> All Rights Reserved, Copyright © 2023</p>
+        <ul style="list-style: none; margin: 0; padding: 0; display: flex;">
+          <li style="margin: 0 10px;"><a href="#" style="color: #fff; text-decoration: none;">Privacy Policy</a></li>
+          <li style="margin: 0 10px;"><a href="#" style="color: #fff; text-decoration: none;">Terms of Use</a></li>
+          <li style="margin: 0 10px;"><a href="#" style="color: #fff; text-decoration: none;">Contact Us</a></li>
+        </ul>
+      </div>
+    </footer> 
     
 </body>
 </html>

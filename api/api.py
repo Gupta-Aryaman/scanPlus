@@ -31,25 +31,11 @@ import datetime
 
 curr_dir = os.path.abspath(os.path.dirname(__file__))
 app = Flask(__name__)
-# app.app_context()
-# app.app_context().push()
 
-# scheduler = APScheduler()
-# scheduler.init_app(app)
-# scheduler.start()
 scheduler = BackgroundScheduler(timezone="Asia/Kolkata")
-# scheduler.__init__(app)
+
 scheduler.start()
 
-# CORS(app, supports_credentials=True)
-# app.config['CORS_HEADERS'] = 'Content-Type'
-# app.secret_key = '38eyhdasjhy83e29qo8esdksan235e283ieqwiy2893'
-
-# app.config['SECURITY_TOKEN_AUTHENTICATION_HEADER'] = 'Authentication-Token'
-# app.config['WTF_CSRF_ENABLED'] = False
-# app.config['SECURITY_PASSWORD_SALT'] = 'dsaugdsanevwqydfbsa'
-
-# app.config['SECRET_KEY'] = 'mysecretkey'
 app.config["JWT_COOKIE_SECURE"] = False
 app.config["JWT_TOKEN_LOCATION"] = ["headers"]
 app.config["JWT_SECRET_KEY"] = "super-secret"  # Change this in your code!
@@ -58,9 +44,7 @@ app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(minutes=30)
 jwt = JWTManager(app)
 
 api = Api(app)
-# security = Security(app, user_datastore)
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///database.sqlite"
-# app.config['SQLALCHEMY_DATABASE_URI'] ='sqlite:///' + os.path.join(os.getcwd(), 'database.sqlite')
 
 upload_folder_pfp = "images/pfp"
 app.config["UPLOAD_FOLDER_PFP"] = upload_folder_pfp
@@ -103,28 +87,6 @@ def encoding_image(path):
         img = file.read()
     return base64.b64encode(img).decode('utf-8')
 
-# def token_required(f):
-#     @wraps(f)
-#     def decorated(*args, **kwargs):
-#         token = None
-#         if 'x-access-token' in request.headers:
-#             token = request.headers['x-access-token']
-#         if not token:
-#             return jsonify({'message':'Token is missing!'})
-#         # try:
-#         #     print("HI")
-#         #     data = jwt.decode(token, app.config['SECRET_KEY'])
-#         #     print(data)
-#         #     current_user = App_user.query.filter_by(email=data['email']).first()
-#         # except:
-#         #     return make_response("Invalid Token", 401, {'message': 'Token is invalid'})
-#         data = get_jwt()["user"]
-#         print(data['user'])
-#         current_user = App_user.query.filter_by(email=data.encode('utf-8')).first()
-#         print(current_user)
-#         return f(current_user, *args, **kwargs)
-    
-#     return decorated
 
 class SignUp(Resource):
     def post(self):
@@ -167,11 +129,6 @@ class PrescriptionUpload(Resource):
     def post(self):
         # try:
         email = request.form['email']
-        # email=get_jwt_identity().first()
-        # pic_filename = secure_filename(image.filename)
-        # pic_name = str(uuid.uuid1()) + "_" + pic_filename
-
-        # image.save(os.path.join(app.config['UPLOAD_FOLDER_prescriptions'], pic_name))
         pic_name = request.form['pic_name']
 
         q = Prescription(prescription_name = pic_name, user_email = email)

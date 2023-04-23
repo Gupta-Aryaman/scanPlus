@@ -41,28 +41,20 @@ app.config.update(dict(
     MAIL_PORT = 587,
     MAIL_USE_TLS = True,
     MAIL_USE_SSL = False,
-    MAIL_USERNAME = 'aryaman28112002@gmail.com',
-    MAIL_PASSWORD = 'onovaabwbxjoxsek',
+    MAIL_USERNAME = os.environ['email'],
+    MAIL_PASSWORD = os.environ['pass']
 ))
 
 mail= Mail(app)
 
 def send_mail(message, mail_id):
     with app.app_context():
-        msg = Message('Hello', sender = 'aryaman28112002@gmail.com', recipients = [mail_id])
+        msg = Message('Hello', sender = os.environ['email'], recipients = [mail_id])
         # mail.send(msg)
         msg.html = mail_body(message)
         mail.send(msg)
         print("Sent")
         return
-    
-# def send_email(to: str, message: MIMEMultipart):
-#     smtp_server = smtplib.SMTP("smtp.gmail.com", 587)
-#     smtp_server.starttls()
-#     smtp_server.login("21103301@mail.jiit.ac.in", "d.p.snoida")
-#     text = message.as_string()
-#     smtp_server.sendmail("21103301@mail.jiit.ac.in", to, text)
-#     smtp_server.quit()
 
 
 @app.route("/", methods = ["GET"])
@@ -235,11 +227,4 @@ def dashboard_upload():
         return "hi"
 
 if __name__=="__main__":
-    # message = MIMEMultipart()
-    # message["From"] = "21103301@mai.jiit.ac.in"
-    # message["To"] = "aryaman28112002@gmail.com"
-    # message["Subject"] = "Test Email"
-    # message.attach(MIMEText("hi", "plain"))
-
-    # send_email("email", message)
     app.run(debug=True, port=8000)

@@ -1,4 +1,6 @@
-# Handwritten Doctor's Prescription to Text Conversion, Classification System and Medicine Scheduler
+# scanPlus
+
+## <i>Handwritten Doctor's Prescription to Text Conversion, Classification System and Medicine Scheduler</i>
 
 ## Project Description:
 The goal of this project is to develop a system that can convert doctor's handwritten prescriptions into machine-readable text and classify the medicines along with their doses. The system will also send an alert to the patient's registered email address containing all the relevant prescription details. The project will utilize Natural Language Processing (NLP) 

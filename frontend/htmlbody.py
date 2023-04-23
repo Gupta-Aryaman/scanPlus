@@ -172,9 +172,10 @@ def mail_body(message):
                               <table width="100%" cellpadding="0" cellspacing="0" border="0">
                                 <tr>
                                   <td style="padding-right: 0px;padding-left: 0px;" align="center">
-
-                                    <img align="center" border="0" src="./static/logo.png" alt="" title="" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 100%;max-width: 600px;"
-                                      width="600" />
+                                     
+                                    <a href='https://postimg.cc/bZB39K2Y' target='_blank'><img src='https://i.postimg.cc/bZB39K2Y/scanAPP.png' border='0' align="center" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 100%;max-width: 600px;"
+                                      width="600" alt='scan-APP-removebg-preview'/></a>
+                                    
 
                                   </td>
                                 </tr>

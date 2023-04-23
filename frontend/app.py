@@ -4,6 +4,19 @@ from werkzeug.utils import secure_filename
 import uuid
 import os
 import ast
+import re
+from apscheduler.schedulers.background import BackgroundScheduler
+from htmlbody import *
+
+
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.mime.application import MIMEApplication
+
+from datetime import *
+import smtplib
+
+
 
 app = Flask(__name__)
 
@@ -14,7 +27,43 @@ upload_folder_prescriptions = "/home/aryaman/Desktop/raj-it/images/prescriptions
 app.config["UPLOAD_FOLDER_prescriptions"] = upload_folder_prescriptions
 
 
+scheduler = BackgroundScheduler(timezone="Asia/Kolkata")
+# scheduler.__init__(app)
+scheduler.start()
+
 api_url = "http://127.0.0.1:5000"
+
+from flask_mail import Mail, Message
+
+app.config.update(dict(
+    MAIL_DEBUG = True,
+    MAIL_SERVER = 'smtp.gmail.com',
+    MAIL_PORT = 587,
+    MAIL_USE_TLS = True,
+    MAIL_USE_SSL = False,
+    MAIL_USERNAME = 'aryaman28112002@gmail.com',
+    MAIL_PASSWORD = 'onovaabwbxjoxsek',
+))
+
+mail= Mail(app)
+
+def send_mail(message, mail_id):
+    with app.app_context():
+        msg = Message('Hello', sender = 'aryaman28112002@gmail.com', recipients = [mail_id])
+        # mail.send(msg)
+        msg.html = mail_body(message)
+        mail.send(msg)
+        print("Sent")
+        return
+    
+# def send_email(to: str, message: MIMEMultipart):
+#     smtp_server = smtplib.SMTP("smtp.gmail.com", 587)
+#     smtp_server.starttls()
+#     smtp_server.login("21103301@mail.jiit.ac.in", "d.p.snoida")
+#     text = message.as_string()
+#     smtp_server.sendmail("21103301@mail.jiit.ac.in", to, text)
+#     smtp_server.quit()
+
 
 @app.route("/", methods = ["GET"])
 def home_page():
@@ -99,6 +148,21 @@ def scan():
                 i+=1
                 j+=1
 
+        email = request.form['email']
+
+        working_list = []
+        for i in medicines_list:
+            x = re.findall(r'\d+',i[1])
+            if len(x)!=0:
+                x = int(x[0])
+            working_list.append((i[0],x))
+        print(working_list)
+        for i in working_list:
+            if isinstance(i[1], int):
+                print("hi")
+                end_date = datetime.now() + timedelta(days=i[1])
+                job = scheduler.add_job(send_mail,'date', [i[0], email], run_date=datetime.now())
+                job = scheduler.add_job(send_mail,'interval', [i[0], email], days=1, end_date = end_date)
         name = ''
 
         if 'Name' in response:
@@ -171,4 +235,11 @@ def dashboard_upload():
         return "hi"
 
 if __name__=="__main__":
+    # message = MIMEMultipart()
+    # message["From"] = "21103301@mai.jiit.ac.in"
+    # message["To"] = "aryaman28112002@gmail.com"
+    # message["Subject"] = "Test Email"
+    # message.attach(MIMEText("hi", "plain"))
+
+    # send_email("email", message)
     app.run(debug=True, port=8000)

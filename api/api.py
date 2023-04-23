@@ -83,15 +83,15 @@ app.config.update(dict(
     MAIL_PORT = 587,
     MAIL_USE_TLS = True,
     MAIL_USE_SSL = False,
-    MAIL_USERNAME = '21f1003758@ds.study.iitm.ac.in',
-    MAIL_PASSWORD = 'gtbvweccorelovqa',
+    MAIL_USERNAME = 'aryaman28112002@gmail.com',
+    MAIL_PASSWORD = 'onovaabwbxjoxsek',
 ))
 
 mail= Mail(app)
 
 def send_mail(message, mail_id):
     with app.app_context():
-        msg = Message('Hello', sender = '21f1003758@ds.study.iitm.ac.in', recipients = [mail_id])
+        msg = Message('Hello', sender = 'aryaman28112002@gmail.com', recipients = [mail_id])
         # mail.send(msg)
         msg.html = mail_body(message)
         mail.send(msg)
@@ -163,36 +163,37 @@ class Login(Resource):
             return make_response("Invalid Credentials", 401, {'authentication': "login required", 'token':''})
 
 class PrescriptionUpload(Resource):
-    @jwt_required
-    def post(self, current_user):
-        try:
-            email = current_user.email
-            image = request.files['prescription']
-            pic_filename = secure_filename(image.filename)
-            pic_name = str(uuid.uuid1()) + "_" + pic_filename
+    @jwt_required()
+    def post(self):
+        # try:
+        email = request.form['email']
+        # email=get_jwt_identity().first()
+        # pic_filename = secure_filename(image.filename)
+        # pic_name = str(uuid.uuid1()) + "_" + pic_filename
 
-            image.save(os.path.join(app.config['UPLOAD_FOLDER_prescriptions'], pic_name))
+        # image.save(os.path.join(app.config['UPLOAD_FOLDER_prescriptions'], pic_name))
+        pic_name = request.form['pic_name']
 
-            q = Prescription(prescription_name = pic_name, user_email = email)
-            db.session.add(q)
-            db.session.commit()
-            
-            
-            x = (ner_model.predict(detectText(os.path.join(app.config['UPLOAD_FOLDER_prescriptions'], pic_name))))
+        q = Prescription(prescription_name = pic_name, user_email = email)
+        db.session.add(q)
+        db.session.commit()
+        
+        
+        x = (ner_model.predict(detectText(os.path.join(app.config['UPLOAD_FOLDER_prescriptions'], pic_name))))
 
-            medicine = x["Medicine"]
-            msg = """Your Current Medication - 
-            """
-            counter = 0
-            for i in medicine:
-                msg = msg + str(counter) + ") " + i + "\n"
+        # medicine = x["Medicine"]
+        # msg = """Your Current Medication - 
+        # """
+        counter = 0
+        # for i in medicine:
+        #     msg = msg + str(counter) + ") " + i + "\n"
 
-            job = scheduler.add_job(send_mail,'interval', [msg, email], hour = "10")
+        # job = scheduler.add_job(send_mail,'interval', [msg, email], hour = "10")
 
-            return x
+        return json.dumps(x)
 
-        except:
-            abort(500)
+        # except:
+        #     abort(500)
 
 class Dashboard(Resource):
     @jwt_required()
@@ -201,6 +202,7 @@ class Dashboard(Resource):
         #uname = request.form["email"]
         # print(auth.current_user())
             email = get_jwt_identity().encode("utf-8")
+            print(email)
             user = App_user.query.filter_by(email = email).first()
             uname = user.email
             # find_user = App_user.query.filter_by(email = uname).first()
@@ -270,9 +272,10 @@ class Scan(Resource):
 
         return json.dumps(x)
 
-# @app.route("/")
-# def test_func():
-#     return "Hello World"
+class Schedule(Resource):
+    def post(self):
+        pass
+
 
 api.add_resource(Login, "/login")
 api.add_resource(SignUp, "/signup")
@@ -283,6 +286,7 @@ api.add_resource(DeletePrescription, "/dashboard/delete")
 api.add_resource(Logout, "/logout")
 api.add_resource(SendMail, "/api/mail")
 api.add_resource(Scan, "/scan")
+api.add_resource(Schedule, "/schedule")
 
 if __name__=="__main__":
     db.create_all()

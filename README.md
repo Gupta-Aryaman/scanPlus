@@ -56,4 +56,4 @@ python main.py
 5. Open a pull request.
 
 ## License
-This project is licensed under the MIT License. See the LICENSE file for more details.
+This project is licensed under the [MIT License](https://github.com/Gupta-Aryaman/scanPlus/blob/main/LICENSE).

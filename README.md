@@ -8,6 +8,21 @@ Key features:
 * NER Model: Classifies the extracted text into relevant categories.
 * Alert System: Sends an email alert containing all the prescription details (medicines, doses, and category) to the patient's registered email address.
 
+## OCR and NER Pipeline for Prescription Processing
+
+1. **OCR (Optical Character Recognition)**  
+   - Converts handwritten doctor prescriptions into machine-readable text using OCR techniques.
+
+2. **NER (Named Entity Recognition)**  
+   - **Input:** Text from the OCR step containing unstructured data such as medicine names and dosage instructions.
+   - **BERT Embedding:** Converts the input text into context-aware embeddings.
+   - **CHAR CNN-BiLSTM:**  
+     - Character-level CNN captures morphological features of words.
+     - BiLSTM captures bidirectional context of the text sequence.
+   - **CRF (Conditional Random Field):** Ensures valid label sequences for structured output like medicine names, dosages, and eating schedules.
+
+**Output:** Structured data with medicine names, dosages, and schedules extracted from the text.
+
 ## Technologies Used:
 - Python
 - Natural Language Processing (NLP) techniques

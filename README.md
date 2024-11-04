@@ -52,16 +52,28 @@ pip install -r requirements.txt
   ```
   aws configure
   ```
+   - Add your region_name, aws_access_key_id and aws_secret_access_key in api/ml_model/ml_model.py file
+5. Create the model
+   - Go in api/ml_model folder, and open ner.py
+   - call the train_model function to the ner train the model
 6. Run the project
+   - Run the ML model flask app by ->
 ```
-python main.py
+cd api
+python3 api.py
+```
+   - Run the frontend flask app by ->
+```
+cd frontend
+python3 app.py
 ```
 7. Set up Cron Jobs (if applicable)
    - Configure the cron jobs as per your requirements to automate tasks.
 
 ## Usage
 1. Upload or provide the handwritten prescription image to the system.
-2. The system will process the image, extract text, classify it, and send an email with the prescription details.
+2. The system will process the image, extract text, classify it and get the medicine names and dosages along with their schedule.
+3. The application will send you email reminders when it's time to take your medication, based on your scheduled dosage timings.
 
 ## Contributing
 1. Fork the repository.

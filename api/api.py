@@ -16,7 +16,7 @@ from htmlbody import *
 from apscheduler.schedulers.background import BackgroundScheduler
 import base64
 
-from ner import *
+from ml_model.ner import *
 
 import jwt
 from flask_jwt_extended import create_access_token
@@ -67,15 +67,15 @@ app.config.update(dict(
     MAIL_PORT = 587,
     MAIL_USE_TLS = True,
     MAIL_USE_SSL = False,
-    MAIL_USERNAME = 'aryaman28112002@gmail.com',
-    MAIL_PASSWORD = 'onovaabwbxjoxsek',
+    MAIL_USERNAME = 'xyz@gmail.com',
+    MAIL_PASSWORD = '',
 ))
 
 mail= Mail(app)
 
 def send_mail(message, mail_id):
     with app.app_context():
-        msg = Message('Hello', sender = 'aryaman28112002@gmail.com', recipients = [mail_id])
+        msg = Message('Hello', sender = 'xyz@gmail.com', recipients = [mail_id])
         # mail.send(msg)
         msg.html = mail_body(message)
         mail.send(msg)
@@ -136,7 +136,7 @@ class PrescriptionUpload(Resource):
         db.session.commit()
         
         
-        x = (ner_model.predict(detectText(os.path.join(app.config['UPLOAD_FOLDER_prescriptions'], pic_name))))
+        x = (ner_model.predict(detect_text(os.path.join(app.config['UPLOAD_FOLDER_prescriptions'], pic_name))))
 
         # medicine = x["Medicine"]
         # msg = """Your Current Medication - 
@@ -216,16 +216,16 @@ class Logout(Resource): #done
 class SendMail(Resource):
     def get(self):
         message = "hi"
-        mail_id = "aryaman28112002@gmail.com"
+        mail_id = "xyz@gmail.com"
         
         with app.app_context():
-            job = scheduler.add_job(send_mail,'interval', ["hi", "aryaman28112002@gmail.com"], seconds=10)
+            job = scheduler.add_job(send_mail,'interval', ["hi", "xyz@gmail.com"], seconds=10)
         return
 
 class Scan(Resource):
     def post(self):
         file_path = request.form['path']
-        x = (ner_model.predict(detectText(file_path)))
+        x = (ner_model.predict(detect_text(file_path)))
 
         return json.dumps(x)
 
@@ -248,6 +248,6 @@ api.add_resource(Schedule, "/schedule")
 if __name__=="__main__":
     db.create_all()
     
-    ner_model = initiate_ner()
-    ner_model.load_model("/home/aryaman/Desktop/raj-it/content/model")
+    ner_model = InitiateNER()
+    ner_model.load_model("./content/model")
     app.run(debug=True)

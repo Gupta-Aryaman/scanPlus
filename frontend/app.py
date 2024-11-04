@@ -23,7 +23,7 @@ app = Flask(__name__)
 app.config['token'] = ""
 app.config['email'] = ""
 app.config['UPLOAD_FOLDER_SCAN'] = "/home/aryaman/Desktop/main-app/static/temp"
-upload_folder_prescriptions = "/home/aryaman/Desktop/raj-it/images/prescriptions"
+upload_folder_prescriptions = "/home/images/prescriptions"
 app.config["UPLOAD_FOLDER_prescriptions"] = upload_folder_prescriptions
 
 

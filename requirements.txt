@@ -1,0 +1,12 @@
+spark-nlp==5.5.0
+pyspark
+boto3
+Flask
+Flask-RESTful
+bcrypt
+Flask-Security
+Flask-JWT-Extended
+APScheduler
+Werkzeug
+requests
+APScheduler

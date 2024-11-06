@@ -8,18 +8,27 @@ Key features:
 * NER Model: Classifies the extracted text into relevant categories.
 * Alert System: Sends an email alert containing all the prescription details (medicines, doses, and category) to the patient's registered email address.
 
-## OCR and NER Pipeline for Prescription Processing
+## Approach
+**For more in depth information, [refer this article](https://aryaman.space/from-scribbles-to-structured-data-processing-handwritten-prescriptions-with-spark-nlp/).**
 
-1. **OCR (Optical Character Recognition)**  
+   ### 1. Training the NER Model
+
+![Flowchart](https://github.com/user-attachments/assets/cb4d7e6d-ae26-4da1-9c75-32c638ecebae)
+
+   ### 2. OCR and NER Pipeline for Prescription Processing
+
+- **OCR (Optical Character Recognition)**  
    - Converts handwritten doctor prescriptions into machine-readable text using OCR techniques.
 
-2. **NER (Named Entity Recognition)**  
+- **NER (Named Entity Recognition)**  
    - **Input:** Text from the OCR step containing unstructured data such as medicine names and dosage instructions.
    - **BERT Embedding:** Converts the input text into context-aware embeddings.
    - **CHAR CNN-BiLSTM:**  
      - Character-level CNN captures morphological features of words.
      - BiLSTM captures bidirectional context of the text sequence.
    - **CRF (Conditional Random Field):** Ensures valid label sequences for structured output like medicine names, dosages, and eating schedules.
+  
+![Flowchart (1)](https://github.com/user-attachments/assets/b53ba391-5d47-4c3b-9681-a4d4c28f3f53)
 
 **Output:** Structured data with medicine names, dosages, and schedules extracted from the text.
 

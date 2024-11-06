@@ -1,7 +1,7 @@
-# Handwritten Doctor's Prescription to Text Conversion, Classification System and Medicine Scheduler
+# ScanPlus
 
-## Project Description:
-The goal of this project is to develop a system that can convert doctor's handwritten prescriptions into machine-readable text and classify the medicines along with their doses. The system will also send an alert to the patient's registered email address containing all the relevant prescription details. The project utilizes Natural Language Processing (NLP).
+## What is ScanPlus?
+It is a system that can convert doctor's handwritten prescriptions into machine-readable text and classify the medicines along with their doses. The system will also send an alert to the patient's registered email address containing all the relevant prescription details. The project utilizes Natural Language Processing (NLP).
 
 Key features:
 * AWS Textract: Extracts text from doctor's handwritten prescriptions.
@@ -32,7 +32,7 @@ Key features:
 
 **Output:** Structured data with medicine names, dosages, and schedules extracted from the text.
 
-## Technologies Used:
+## Technologies Used
 - Python
 - Natural Language Processing (NLP) techniques
 - AWS Textract 

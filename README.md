@@ -1,7 +1,7 @@
 # ScanPlus
 
 ## What is ScanPlus?
-A system that can convert doctor's handwritten prescriptions into machine-readable text and classify the medicines along with their doses. The system will also send an alert to the patient's registered email address containing all the relevant prescription details. The project utilizes Natural Language Processing (NLP).
+A system that can convert doctor's handwritten prescriptions into machine-readable text and classify the medicines along with their doses. It will also send an alert to the patient's registered email address containing all the relevant prescription details.
 
 Key features:
 * AWS Textract: Extracts text from doctor's handwritten prescriptions.
